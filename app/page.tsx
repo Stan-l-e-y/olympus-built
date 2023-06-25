@@ -1,5 +1,9 @@
 import styles from './styles.module.css';
+import Image from 'next/image';
+import Gradient from '../public/gradient.png';
+import EmailIcon from '@/icons/EmailIcon';
 
+//TODO: change to extend in tailwind, default colors not working
 export default function Home() {
   return (
     <main className={styles.layout}>
@@ -12,9 +16,9 @@ export default function Home() {
         <div>Login</div>
       </div>
       <div
-        className={`${styles.main} col-start-4 col-end-10 row-start-2 row-end-3`}
+        className={`${styles.main} col-start-4 col-end-10 row-start-2 row-end-3 `}
       >
-        <div className="row-start-2 row-end-3">
+        <div className="row-start-2 row-end-3 relative">
           <div className="text-5xl font-bold">
             A massive library of<br></br> free 3D{' '}
             <span className="text-red-700">shapes</span>
@@ -27,24 +31,38 @@ export default function Home() {
             type="email"
             className={`${styles.emailInput} 
                         w-[455px]
-                        py-2 
+                        py-4 
                         pl-6
                         self-start
                         text-base
                         font-normal
                         placeholder:text-white
                         placeholder:opacity-80     
-                        rounded-2xl
+                        rounded-3xl
                         transition
                         ease-in-out
                         focus:outline-red-300
                         m-0
                         mt-8
-                        focus:outline-none                         
+                        focus:outline-none
+                        placeholder:italic                         
                         flex-1`}
             placeholder="Your email address"
           ></input>
+          <div
+            className={`${styles.buttonInput} absolute top-[248px] right-[60px] bg-gradient-to-r from-red-200 via-red-500 to-red-500 p-2 rounded-3xl w-[168px] text-red-100 text-sm font-semibold`}
+          >
+            <div className="ml-4">Download</div>
+          </div>
+          <EmailIcon className="absolute top-[258px] right-[78px]" />
         </div>
+
+        <Image
+          className={` w-auto rounded-xl h-12 row-start-3 row-end-5 col-start-8 col-end-10`}
+          src={Gradient}
+          alt="Gradient"
+          priority
+        />
       </div>
     </main>
   );

@@ -11,12 +11,14 @@ import Home6 from '@/icons/svgs/Home6';
 import Home7 from '@/icons/svgs/Home7';
 import Home8 from '@/icons/svgs/Home8';
 import Home9 from '@/icons/svgs/Home9';
+import Modal from '@/components/Modal';
 
 //TODO: change to extend in tailwind, default colors not working
 //TODO: add larger svgs for bigger screen size
 export default function Home() {
   return (
     <main className={styles.layout}>
+      <Modal />
       <div className="col-start-4 col-end-5 row-start-1 row-end-3 flex relative z-10">
         <Home2 className=" absolute " />
         <Home1 className="  absolute left-[25px] " />
@@ -30,9 +32,6 @@ export default function Home() {
         <Home5 className="  absolute top-[150px] " />
         <Home6 className="  absolute top-[150px] " />
       </div>
-      {/* <div className="col-start-6 col-end-7 row-start-1 row-end-3 flex relative z-10">
-        <Home7 className="  absolute left-[25px] " />
-      </div> */}
 
       <div className={`${styles.layoutNav} mt-8 flex justify-between z-40`}>
         <div className="mr-7 text-red font-semibold">

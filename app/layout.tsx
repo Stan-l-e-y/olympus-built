@@ -15,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={source.className}>{children}</body>
+      <body className={source.className}>
+        {' '}
+        {children}
+        <div id="modalPortal"></div>
+      </body>
     </html>
   );
 }

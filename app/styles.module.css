@@ -55,8 +55,9 @@
         64px,
         1fr
       );
-    grid-template-columns: minmax(8px, 1fr), minmax(1fr, 1fr), minmax(1fr, 1fr),
-      minmax(8px, 1fr);
+    grid-template-columns:
+      minmax(32px, 16px) minmax(128px, 1fr)
+      minmax(128px, 1fr) minmax(8px, 1fr);
   }
 
   .mainChild {

@@ -2,20 +2,49 @@ import styles from './styles.module.css';
 import Image from 'next/image';
 import Gradient from '../public/gradient.png';
 import EmailIcon from '@/icons/EmailIcon';
+import Home1 from '@/icons/svgs/Home1';
+import Home2 from '@/icons/svgs/Home2';
+import Home3 from '@/icons/svgs/Home3';
+import Home4 from '@/icons/svgs/Home4';
+import Home5 from '@/icons/svgs/Home5';
+import Home6 from '@/icons/svgs/Home6';
+import Home7 from '@/icons/svgs/Home7';
+import Home8 from '@/icons/svgs/Home8';
+import Home9 from '@/icons/svgs/Home9';
 
 //TODO: change to extend in tailwind, default colors not working
+//TODO: add larger svgs for bigger screen size
 export default function Home() {
   return (
     <main className={styles.layout}>
-      <div className={`${styles.layoutNav} mt-8 flex justify-between`}>
+      <div className="col-start-4 col-end-5 row-start-1 row-end-3 flex relative z-10">
+        <Home2 className=" absolute " />
+        <Home1 className="  absolute left-[25px] " />
+        <Home3 className="  absolute left-[55px] " />
+        <Home7 className="  absolute left-[405px] " />
+        <Home8 className="  absolute left-[805px]  " />
+        <Home9 className="  absolute left-[955px] top-[100px]  " />
+      </div>
+      <div className="col-start-1 col-end-3 row-start-2 row-end-3 flex relative">
+        <Home4 className="  absolute left-[15px] " />
+        <Home5 className="  absolute top-[150px] " />
+        <Home6 className="  absolute top-[150px] " />
+      </div>
+      {/* <div className="col-start-6 col-end-7 row-start-1 row-end-3 flex relative z-10">
+        <Home7 className="  absolute left-[25px] " />
+      </div> */}
+
+      <div className={`${styles.layoutNav} mt-8 flex justify-between z-40`}>
         <div className="mr-7 text-red font-semibold">
           <div>Home</div>
           <div className="border-t-2 mt-3 border-red-700  "></div>
         </div>
         <div className="mr-10 font-semibold">Products</div>
-        <div>Login</div>
+        <div className="bg-red-700 py-2 px-5 rounded-3xl text-white font-bold">
+          Login
+        </div>
       </div>
-      <div className={`${styles.main} ${styles.layoutMain}  `}>
+      <div className={`${styles.main} ${styles.layoutMain}  z-40`}>
         <div className={`${styles.mainChild}  relative`}>
           <div className="text-5xl font-bold">
             A massive library of<br></br> free 3D{' '}
@@ -34,8 +63,7 @@ export default function Home() {
                           pl-6
                           self-start
                           text-base
-                          font-normal
-                          placeholder:text-white
+                          font-normal                         
                           placeholder:opacity-80
                           rounded-3xl
                           transition

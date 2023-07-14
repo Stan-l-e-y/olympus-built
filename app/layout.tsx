@@ -1,5 +1,6 @@
 import './globals.css';
 import { Source_Sans_3 } from 'next/font/google';
+import { useIsModalOpen } from '@/lib/store';
 
 const source = Source_Sans_3({ subsets: ['latin'] });
 
@@ -13,9 +14,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const isModalOpen = useIsModalOpen();
+  // console.log(isModalOpen);
   return (
     <html lang="en">
-      <body className={source.className}>
+      <body className={`${source.className}  `}>
         {' '}
         {children}
         <div id="modalPortal"></div>

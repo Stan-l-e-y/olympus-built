@@ -1,3 +1,4 @@
+'use client';
 import styles from './styles.module.css';
 import Image from 'next/image';
 import Gradient from '../public/gradient.png';
@@ -12,13 +13,23 @@ import Home7 from '@/icons/svgs/Home7';
 import Home8 from '@/icons/svgs/Home8';
 import Home9 from '@/icons/svgs/Home9';
 import Modal from '@/components/Modal';
+import { useIsModalOpen, useSetModalOpen } from '@/lib/store';
+import { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
+const DynamicModal = dynamic(() => import('../components/Modal'), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 //TODO: change to extend in tailwind, default colors not working
 //TODO: add larger svgs for bigger screen size
 export default function Home() {
+  const setModalOpen = useSetModalOpen();
+  const isModalOpen = useIsModalOpen();
+
   return (
     <main className={styles.layout}>
-      <Modal />
+      <DynamicModal />
       <div className="col-start-4 col-end-5 row-start-1 row-end-3 flex relative z-10">
         <Home2 className=" absolute " />
         <Home1 className="  absolute left-[25px] " />
@@ -39,7 +50,10 @@ export default function Home() {
           <div className="border-t-2 mt-3 border-red-700  "></div>
         </div>
         <div className="mr-10 font-semibold">Products</div>
-        <div className="bg-red-700 py-2 px-5 rounded-3xl text-white font-bold">
+        <div
+          className="bg-red-700 py-2 px-5 rounded-3xl text-white font-bold hover:cursor-pointer"
+          onClick={() => setModalOpen(true)}
+        >
           Login
         </div>
       </div>

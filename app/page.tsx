@@ -29,7 +29,8 @@ export default function Home() {
 
   return (
     <main className={styles.layout}>
-      <DynamicModal />
+      {isModalOpen ? <DynamicModal /> : ''}
+
       <div className="col-start-4 col-end-5 row-start-1 row-end-3 flex relative z-10">
         <Home2 className=" absolute " />
         <Home1 className="  absolute left-[25px] " />

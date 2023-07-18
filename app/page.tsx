@@ -21,8 +21,8 @@ const DynamicModal = dynamic(() => import('../components/Modal'), {
   ssr: false,
 });
 
-//TODO: change to extend in tailwind, default colors not working
 //TODO: add larger svgs for bigger screen size
+//TODO: media query the modal position
 export default function Home() {
   const setModalOpen = useSetModalOpen();
   const isModalOpen = useIsModalOpen();
@@ -108,13 +108,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
-
-{
-  /* <div
-              className={`${styles.buttonInput} absolute top-[248px] right-[60px] bg-gradient-to-r from-red-200 via-red-500 to-red-500 p-2 rounded-3xl w-[168px] text-red-100 text-sm font-semibold`}
-            >
-              <div className="ml-4">Download</div>
-            </div>
-            <EmailIcon className="absolute top-[258px] right-[78px]" /> */
 }

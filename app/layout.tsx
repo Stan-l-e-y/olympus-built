@@ -1,3 +1,4 @@
+'use client';
 import './globals.css';
 import { Source_Sans_3 } from 'next/font/google';
 import { useIsModalOpen } from '@/lib/store';
@@ -14,13 +15,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const isModalOpen = useIsModalOpen();
+  const isModalOpen = useIsModalOpen();
   // console.log(isModalOpen);
   return (
     <html lang="en">
-      <body className={`${source.className}  `}>
+      <body
+        className={`${source.className} ${
+          isModalOpen ? 'overflow-hidden ' : ''
+        } `}
+      >
         {' '}
-        {children}
+        <div className={` ${isModalOpen ? 'blur-[2px] ' : ''} `}>
+          {children}
+        </div>
         <div id="modalPortal"></div>
       </body>
     </html>

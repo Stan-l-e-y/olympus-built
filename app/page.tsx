@@ -12,7 +12,7 @@ import Home6 from '@/icons/svgs/Home6';
 import Home7 from '@/icons/svgs/Home7';
 import Home8 from '@/icons/svgs/Home8';
 import Home9 from '@/icons/svgs/Home9';
-import Modal from '@/components/Modal';
+import LoginModal from '@/components/LoginModal';
 import { useIsModalOpen, useSetModalOpen } from '@/lib/store';
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <main className={styles.layout}>
-      {isModalOpen ? <DynamicModal /> : ''}
+      {isModalOpen ? <DynamicModal content={<LoginModal />} /> : ''}
 
       <div className="col-start-4 col-end-5 row-start-1 row-end-3 flex relative z-10">
         <Home2 className=" absolute " />

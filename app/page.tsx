@@ -14,8 +14,22 @@ import Home8 from '@/icons/svgs/Home8';
 import Home9 from '@/icons/svgs/Home9';
 import LoginModal from '@/components/LoginModal';
 import { useIsModalOpen, useSetModalOpen } from '@/lib/store';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import {
+  createClientComponentClient,
+  Session,
+} from '@supabase/auth-helpers-nextjs';
+import type { Database } from '@/lib/database.types';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { LogOut } from 'lucide-react';
+
 const DynamicModal = dynamic(() => import('../components/Modal'), {
   loading: () => <p>Loading...</p>,
   ssr: false,
@@ -23,9 +37,27 @@ const DynamicModal = dynamic(() => import('../components/Modal'), {
 
 //TODO: add larger svgs for bigger screen size
 //TODO: media query the modal position
+
+//TODO: add dark mode via shadcn
 export default function Home() {
   const setModalOpen = useSetModalOpen();
   const isModalOpen = useIsModalOpen();
+  const supabase = createClientComponentClient<Database>();
+
+  const [session, setSession] = useState<Session | null>(null);
+  console.log(session);
+  useEffect(() => {
+    const handleAsync = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (data.session) setSession(data.session);
+    };
+    handleAsync();
+  }, [supabase.auth]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+  };
 
   return (
     <main className={styles.layout}>
@@ -51,12 +83,33 @@ export default function Home() {
           <div className="border-t-2 mt-3 border-red-700  "></div>
         </div>
         <div className="mr-10 font-semibold">Products</div>
-        <div
-          className="bg-red-700 py-2 px-5 rounded-3xl text-white font-bold hover:cursor-pointer"
-          onClick={() => setModalOpen(true)}
-        >
-          Login
-        </div>
+        {session ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={`w-auto rounded-2xl h-12 hover:cursor-pointer`}
+                src={session.user.user_metadata.avatar_url}
+                alt="UserImg"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="mt-2">
+              <DropdownMenuGroup>
+                <DropdownMenuItem className="hover:cursor-pointer">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span onClick={handleSignOut}>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <div
+            className="bg-red-700 py-2 px-5 rounded-3xl text-white font-bold hover:cursor-pointer"
+            onClick={() => setModalOpen(true)}
+          >
+            Login
+          </div>
+        )}
       </div>
       <div className={`${styles.main} ${styles.layoutMain}  z-40`}>
         <div className={`${styles.mainChild}  relative`}>
